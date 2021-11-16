@@ -51,4 +51,13 @@ public class PythonParserTest {
         int int_out = Integer.parseInt(out.strip());
         assertEquals(int_out, 10);
     }
+
+    @Test
+    void ExpressionWithQuotes() {
+        sut.addVariable("x", "\"1\"");
+        sut.addVariable("y", "10");
+        String out = sut.evaluate("\"x + y\"");
+        int int_out = Integer.parseInt(out.strip());
+        assertEquals(int_out, 11);
+    }
 }
