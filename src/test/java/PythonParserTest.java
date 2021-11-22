@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PythonParserTest {
     PythonParser sut;
@@ -59,5 +59,16 @@ public class PythonParserTest {
         String out = sut.evaluate("\"x + y\"");
         int int_out = Integer.parseInt(out.strip());
         assertEquals(int_out, 11);
+    }
+
+    @Test
+    void ExpressionUnparsable() {
+        sut.addVariable("x", "\"1\"");
+        try {
+            String out = sut.evaluate("\"x + y\"");
+            assertTrue(false);
+        } catch (Exception e) {
+            assertTrue(true);
+        }
     }
 }
